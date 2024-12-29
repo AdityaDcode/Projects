@@ -6,9 +6,25 @@
 body{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+}
+.bg{
+    background-image: url('https://plus.unsplash.com/premium_photo-1673306778968-5aab577a7365?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(30px);
+
+}
+.loadText{
+    color: white;
+    font-size: 50px;
 }
