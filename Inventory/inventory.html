@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .form-inline{
+        justify-content: center;
+        padding-bottom: 20px;
+    }
+    body{
+        padding: 20px;
+    }
+    h1{
+        text-align: center;
+
+    }
+</style>
+<body>
+    <div class="jumbotron">
+        <h1>Inventory Management</h1>
+    </div>
+     <form class="form-inline">
+       <input type="text" id="itemName" class="form-control mr-2" placeholder="enter item name">
+        <input type="number" id="itemQty" class="form-control mr-2" placeholder="enter quantity">
+        <input type="number" id="itemPrice" class="form-control mr-2" placeholder="enter price">
+         <button class="btn btn-primary" onclick="addItem()">add</button>
+     </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sl-No</th>
+                <th>Item-Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        let inventory=[];
+        let editIndex=-1;
+        function addItem(){
+            const itemName = document.getElementById('itemName').value.trim();
+            const itemQty = document.getElementById('itemQty').value.trim();
+            const itemPrice = document.getElementById('itemPrice').value.trim();
+
+            if(!itemName || !itemQty || !itemPrice){
+                alert('Please fill all fields');
+                return;
+            }
+            if(editIndex ===-1){
+                inventory.push({name:itemName,qty:itemQty,price:itemPrice});
+            }else{
+                
+            }
+        }
+    </script>
+
+</body>
+</html>

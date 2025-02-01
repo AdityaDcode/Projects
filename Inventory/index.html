@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management2</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-inline {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Inventory</h1>
+    </div>
+   
+
+    <div class="form-inline">
+        <input type="text" id="itemName" class="form-control mr-2" placeholder="Item Name">
+        <input type="number" id="itemQty" class="form-control mr-2" placeholder="Quantity">
+        <input type="number" id="itemPrice" class="form-control mr-2" placeholder="Price">
+        <button class="btn btn-primary" onclick="addItem()">Add</button>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Sl. No</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="inventoryTable">
+            <!-- Table rows will be added dynamically here -->
+        </tbody>
+    </table>
+
+    <script>
+        let inventory = [];
+        let editIndex = -1;
+
+        function addItem() {
+            const itemName = document.getElementById('itemName').value.trim();
+            const itemQty = document.getElementById('itemQty').value.trim();
+            const itemPrice = document.getElementById('itemPrice').value.trim();
+
+            if (!itemName || !itemQty || !itemPrice) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            if (editIndex === -1) {
+                inventory.push({ name: itemName, qty: itemQty, price: itemPrice });
+            } else {
+                inventory[editIndex] = { name: itemName, qty: itemQty, price: itemPrice };
+                editIndex = -1;
+            }
+
+            document.getElementById('itemName').value = '';
+            document.getElementById('itemQty').value = '';
+            document.getElementById('itemPrice').value = '';
+
+            renderTable();
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('inventoryTable');
+            tableBody.innerHTML = '';
+
+            inventory.forEach((item, index) => {
+                const row = `<tr>
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.qty}</td>
+                    <td>${item.price}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" onclick="editItem(${index})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteItem(${index})">Delete</button>
+                    </td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function editItem(index) {
+            const item = inventory[index];
+            document.getElementById('itemName').value = item.name;
+            document.getElementById('itemQty').value = item.qty;
+            document.getElementById('itemPrice').value = item.price;
+            editIndex = index;
+        }
+
+        function deleteItem(index) {
+            if (confirm('Are you sure you want to delete this item?')) {
+                inventory.splice(index, 1);
+                renderTable();
+            }
+        }
+    </script>
+</body>
+</html>

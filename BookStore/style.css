@@ -1,0 +1,12 @@
+.nav{
+    position: relative;
+
+}
+.links{
+    position: absolute;
+    right: 10%;
+}
+.container-fluid{
+    padding-left: 100px;
+
+}
