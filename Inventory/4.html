@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .form-inline {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #categories{
+         height:30px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Inventory Management</h1>
+
+        <form id="itemForm" class="form-inline mb-4">
+            <input type="text" pattern="[A-Za-z1-10\s]+" id="itemName" class="form-control" placeholder="Item Name" required>
+            <input type="number" id="itemQuantity" class="form-control" placeholder="Quantity" required>
+            <input type="number" id="itemPrice" class="form-control" placeholder="Price" required>
+            <label for="Categories">Categories:</label>
+            <select name="Categories" id="categories">
+                <option value="1">one</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+                <option value="5">Five</option>
+            </select>
+            <button type="submit" class="btn btn-primary add">Add Item</button>
+        </form>
+       
+       
+        <br>
+        <br>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryTable">
+                <!-- Inventory items will appear here -->
+            </tbody>
+        </table>
+    </div>
+<script>
+    let items =[];
+    const itemForm = document.getElementById("itemForm");
+    const table = document.getElementById("inventoryTable");
+    let date = new Date();
+   let dateString = date.toISOString().split('T')[0];
+
+
+    function renderTable(){
+        inventoryTable.innerHTML = '';
+        items.forEach((item,index) => {
+          const row= document.createElement('tr');
+            row.innerHTML = `
+    <td>${index+1}</td>
+    <td>${item.name}</td>
+    <td>${item.quantity}</td>
+    <td>${item.price}</td>
+    <td>
+        <button class="btn btn-primary btn-sm" onclick="editItem(${index})">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteItem(${index})">Delete</button>
+    </td>
+    <td>${dateString}</td>
+    `;
+    console.log("renderTable");
+    
+    table.appendChild(row);
+            
+        });
+    }
+
+    itemForm.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        const itemName = document.getElementById("itemName").value;
+        const itemQuantity = document.getElementById("itemQuantity").value;
+        const itemPrice = document.getElementById("itemPrice").value;
+        items.push({name:itemName,quantity:itemQuantity,price:itemPrice});
+        itemForm.reset();
+        console.log("submit");
+        
+        renderTable();
+    });
+    function deleteItem(index){
+        items.splice(index,1);
+        renderTable();
+        console.log("delete");
+        
+    }
+    function editItem(index){
+        const newItemName = prompt("Enter new name:",items[index].name);
+        const newItemQuantity = prompt("Enter new quantity:",items[index].quantity);
+        const newItemPrice = prompt("Enter new price:",items[index].price);
+
+        if(newItemName !== null && newItemQuantity!== null && newItemPrice!==null){
+            items[index].name = newItemName;
+            items[index].quantity=newItemQuantity;
+                <!-- Inventory items will appear here -->
+            items[index].price = newItemPrice;
+            renderTable();
+            console.log("edit");    
+        }
+        console.log(index);
+
+    }
+</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

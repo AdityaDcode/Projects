@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styleAPI.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Quiz</h1>
+    </div>
+    <div class="form-container">
+        <h2>Quiz Selection</h2>
+        <form id="quizForm">
+            <label for="topic">Choose a Topic:</label>
+            <select name="topic" id="topic">
+                <option value="">General Knowledge</option>
+                <option value="history">History</option>
+                <option value="geography">Geography</option>
+                <option value="science">Science</option>
+            </select> 
+
+            <label for="level">Choose Level:</label>
+            <select name="level" id="level">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select> 
+
+            <label for="numberOfQue">Number of Questions:</label>
+            <input type="number" name="numberOfQue" id="numberOfQue" min="5" max="50" placeholder="Enter a number (5-50)">
+
+            <button type="submit" onclick="select()">Start Quiz</button>
+        </form>
+    </div>
+    <div class="app">
+        <h1>Simple Quiz</h1>
+        <div class="quiz">
+            <h2 id="question">que goes here</h2>
+            <div id="answer-buttons">
+                <button class="btn">Answer1</button>
+                <button class="btn">Answer2</button>
+                <button class="btn">answer3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+    <p id="test"></p>
+    <script src="capp.js"></script>
+</body>
+</html>
